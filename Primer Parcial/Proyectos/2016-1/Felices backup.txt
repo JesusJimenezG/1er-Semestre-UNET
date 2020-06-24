@@ -1,0 +1,100 @@
+do {
+		for(i=2,suma=i,j=1; i<=num; i++,suma=i,j++,conthappy=0){
+			//printf ("valor de la primera iteracion: %d\n",i);
+			//printf("valor de la suma %d\n",suma);
+			//system ("pause");
+			while(suma!=1){
+				if(suma>=0&&suma<10){
+					aux[4]=suma;
+					//printf ("numero %d\n",aux[4]);
+					//system ("pause");
+					aux[4]=pow(suma,2);
+					//printf ("elevado %d\n",aux[4]);
+					//system ("pause");
+					suma=aux[4];
+					//printf ("suma %d\n",suma);
+					//system ("pause");
+						if(suma==4){
+							cont++;
+							printf ("El camino de la felicidad para "ANSI_COLOR_RED"%d "ANSI_COLOR_RESET"es infinitamente largo.\n",i);
+							break;
+						}
+					conthappy++;
+				}	if(suma>=10&&suma<100){
+				 		aux[4] = suma % 10;
+				 		//printf ("numero %d\n",aux[4]);
+				 		//system ("pause");
+				 		aux[4] = pow(aux[4],2);
+				 		//printf ("elevado %d\n",aux[4]);
+				 		//system ("pause");
+				 		aux[3] = suma / 10;
+				 		//printf ("numero %d\n",aux[3]);
+				 		//system ("pause");
+				 		aux[3] = pow(aux[3],2);
+				 		//printf ("elevado %d\n",aux[3]);
+				 		//system ("pause");
+				 		suma = aux[4]+aux[3];
+				 		//printf ("suma %d\n",suma);
+				 		//system ("pause");
+				 			if(suma==16||suma==20||suma==37||suma==42||suma==58||suma==89){
+				 				cont++;
+				 				printf ("El camino de la felicidad para "ANSI_COLOR_RED"%d "ANSI_COLOR_RESET"es infinitamente largo.\n",i);
+				 				break;
+							 }
+							conthappy++;
+				 	}	if(suma>=100&&suma<1000){
+				 			aux[4] = suma % 10;
+				 			//printf ("numero %d\n",aux[4]);
+				 			//system ("pause");
+				 			suma = suma - aux[4];
+				 			aux[4] = pow(aux[4],2);
+				 			//printf ("elevado %d\n",aux[4]);
+				 			//system ("pause");
+				 			aux[3] = suma % 100;
+				 			aux[3] = aux[3] / 10;
+				 			//printf ("numero %d\n",aux[3]);
+				 			//system ("pause");
+				 			aux[3] = pow(aux[3],2);
+				 			//printf ("elevado %d\n",aux[3]);
+				 			//system ("pause");
+				 			aux[2] = suma / 100;
+				 			//printf ("numero %d\n",aux[2]);
+				 			//system ("pause");
+				 			aux[2] = pow(aux[2],2);
+				 			//printf ("elevado %d\n",aux[2]);
+				 			//system ("pause");
+				 			suma = aux[4]+aux[3]+aux[2];
+				 			//printf ("suma %d\n",suma);
+				 			//system ("pause");
+				 				if(suma==145){
+				 					cont++;
+				 					printf ("El camino de la felicidad para "ANSI_COLOR_RED"%d "ANSI_COLOR_RESET"es infinitamente largo.\n",i);
+				 					break;
+								 }
+								conthappy++;
+						 }	if(suma>=1000&&suma<10000){
+						 	aux[4] = suma % 10;
+						 	suma = suma - aux[4];
+						 	aux[4] = pow(aux[4],2);
+						 	aux[3] = suma % 100;
+						 	suma = suma - aux[3] - aux[4];
+						 	aux[3] = aux[3] / 10;
+						 	aux[3] = pow(aux[3],2);
+						 	aux[2] = suma % 1000;
+						 	suma = suma - aux[2] - aux[3] - aux[4];
+						 	aux[2] = aux[2] / 100;
+						 	aux[2] = pow(aux[2],2);
+						 	aux[1] = suma % 10000;
+						 	suma = suma - aux[1] - aux[2] - aux[3] - aux[4];
+						 	aux[1] = aux[1] / 1000;
+						 	aux[1] = pow(aux[1],2);
+						 	suma = aux[4]+aux[3]+aux[2]+aux[1];
+							 conthappy++;	 	
+						 } 
+					}	
+					if (suma==1){
+						printf ("El camino de la felicidad para "ANSI_COLOR_GREEN"%d "ANSI_COLOR_RESET"es de: "ANSI_COLOR_GREEN"%d\n"ANSI_COLOR_RESET,i,conthappy);	
+					}
+				}
+			printf ("En el camino de la felicidad hasta el numero "ANSI_COLOR_GREEN"%d"ANSI_COLOR_RESET" hay "ANSI_COLOR_RED"%d"ANSI_COLOR_RESET" numeros infelices.\n\n",num,cont);	
+	}while (j<num);

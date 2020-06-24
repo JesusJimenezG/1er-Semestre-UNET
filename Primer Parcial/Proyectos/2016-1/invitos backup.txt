@@ -1,0 +1,91 @@
+if(num>0||num<10){		//Descomposición del número P	
+		dig[4] = num % 10;		//extracción de la unidad
+		if(num>10||num<100){
+			aux = num - dig[4];		//extracción de la decena
+			aux = aux % 100;
+			dig[3] = aux / 10;
+			if(num>100||num<1000){		//extracción de la centena
+			aux = num - dig[3]*10 - dig[4];
+			aux = aux % 1000;
+			dig[2] = aux / 100;
+			if(num>1000||num<10000){		//extracción de la unidad de mil
+				aux = num - dig[2]*100 - dig[3]*10 - dig[4];
+				aux = aux % 10000;
+				dig[1] = aux / 1000;
+				if(num>=10000&&num!=0){			//extracción de la decena de mil
+					aux = num - dig[1]*1000 - dig[2]*100 - dig[3]*10 - dig[4];	
+					dig[0] = aux / 10000;
+					}	else{					//de no haber decena de mil, el número en cuestión se igual a 0 ó casilla vacía
+						dig [0] = 0;
+					}
+				}
+			}
+		}
+	}					
+	
+	for (i=0;i<=4;i++){			//Imprimir los numeros descompuestos haciendo verificacion por paso
+		if (dig[i])
+		printf ("%d\t",dig[i]);
+	}
+	printf ("\n");
+	
+	for (i=0; i<=4;i++){		//Extracción de los números no primos, haciendo prueba por pase de cada una de las casillas
+		for(j=2,aux=1,l=0; j<dig[i]&&aux!=0; j++){		
+			if (dig[i]>1&&dig[i]<10){			//de ser el numero diferente de 0, se divide por 2 y se comprueba si su resto es 0
+				aux = dig[i] % j;
+				/*printf ("\nel residuo de %d entre %d es = %d\n",dig[i],j,aux);
+				system ("pause");*/					//comprobación de divisor, dividendo, resto y resultado
+					if(aux==0){				//de serlo, el numero no es primo
+					l=1;
+					}
+				}
+			}
+			if (l==1&&dig[i]!=0){			//se muestra por pantalla el numero que no es primo
+				 printf(ANSI_COLOR_RED"%d\t",dig[i]);
+				 
+			}	if(l!=1&&dig[i]!=0){		//se muestra por pantalla el numero primo de ser diferente de 0
+				prim[i] = dig[i];
+				printf(ANSI_COLOR_RESET"%d\t",prim[i]);
+			}
+		}
+		
+	printf (ANSI_COLOR_RESET);
+	printf ("los numeros "ANSI_COLOR_RED"rojos "ANSI_COLOR_RESET"no son primos, por lo tanto, se eliminan.\n");	
+	
+	for (i=4,j=0,aux=0; i>=0; i--){		//suma de cada uno de los digitos primos, elevándolo de derecha izquierda 
+		if (prim[i]>1&&prim[i]<10){		//si el numero primo es diferente de 0
+			//printf("la potencia de %d ",prim[i]);	//verificador de la potencia de las unidades, decenas, etc
+			pot = pow(10,j);
+			cad[i] = prim[i]*pot;
+			//printf("a la %d es: %d",j,prim[i]);
+			j++;
+			aux += cad[i];			//se debería obtener una cifra entera que no contenga ceros
+		}
+		/*printf ("la suma total de los numeros primos es: %d",aux);	//mostrar la suma total, o, la cifra de numeros primos extraida 
+		system ("pause");*/
+	}
+	for(k=0;k<=4;k++){	//Imprimir los numeros primos
+		if(prim[k]>0&&prim[k]<10){
+			printf(ANSI_COLOR_GREEN"%d\t",prim[k]);
+		}
+	}
+	
+	printf (ANSI_COLOR_RESET);
+	printf ("los numeros "ANSI_COLOR_GREEN"verdes "ANSI_COLOR_RESET"son primos, por lo tanto, se sumaran para verificar si es numero invicto.\n");
+	
+	for (i=2,j=0; i<aux&&j!=1; i++){
+		l = aux % i;
+		/*printf ("el resto de %d entre %d es = %d",aux,i,l);
+		system ("pause");*/	//verificación si el numero no es invicto
+		if(l==0){
+			j=1;
+		}
+	}	
+	if(aux==0){
+		printf ("El numero "ANSI_COLOR_RED"NO "ANSI_COLOR_RESET"es invicto.\n");
+	}	if(j==1){
+			printf ("El numero "ANSI_COLOR_RED"%d "ANSI_COLOR_RESET"NO es invicto.\n",aux);
+		}	if(j!=1&&aux!=0){
+				printf ("El numero "ANSI_COLOR_GREEN"%d "ANSI_COLOR_RESET"ES INVICTO.\n",aux);
+			}
+	return;
